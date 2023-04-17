@@ -1,4 +1,5 @@
 const { NotImplementedError } = require('../extensions/index.js');
+const { ListNode } = require('../extensions/list-node.js');
 
 /**
  * Implement the Stack with a given interface via array.
@@ -13,21 +14,44 @@ const { NotImplementedError } = require('../extensions/index.js');
  *
  */
 class Stack {
-  push(/* element */) {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+  constructor() {
+    this.head = null;
+    this.length = null;
+  }
+  push(value) {
+  // помещаем значение на верхушку стека
+  const node = new ListNode(value);
+  
+  if (this.head) {
+  //если какой-то элемент есть вверху, то следующей старая верхушка
+    node.next = this.head;
+  // верхушка - это новый элемент
+    this.head = node;
+  } else {
+  //если верхушки не было - создаем ее  
+    this.head = node;
+  }
+  //увеличиваем высоту стека
+    this.length++;
   }
 
-  pop() {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+  pop(value) {
+    //присваиваем переменной верхнюю позицию стека
+    const current = this.head;
+    //переназначем верхушку следующему элементу стека
+    this.head = this.head.next;
+    //уменьшаем высоту стека
+    this.length--;
+    //возвращаем удаленное значение
+    return current.value;
   }
 
-  peek() {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+  peek(value) {
+    return this.head.value;
   }
 }
+
+//The Rolling Scopes School - Data Structures with JS 01:07:00
 
 module.exports = {
   Stack
